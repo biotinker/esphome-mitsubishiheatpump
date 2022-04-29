@@ -405,9 +405,17 @@ void MitsubishiHeatPump::hpStatusChanged(heatpumpStatus currentStatus) {
     this->publish_state();
 }
 
+float MitsubishiHeatPump::FahrenheitToCelsius(float tempF) {
+  float temp = (tempF - 32.0) / 1.8;                
+  return ((float)round(temp*2))/2;                 //Round to nearest 0.5C
+}
+
+
 void MitsubishiHeatPump::set_remote_temperature(float temp) {
     ESP_LOGD(TAG, "Setting remote temp: %.1f", temp);
-    this->hp->setRemoteTemperature(temp);
+    cTemp = this->FahrenheitToCelsius(temp)
+    ESP_LOGD(TAG, "After celsius convert: %.1f", cTemp);
+    this->hp->setRemoteTemperature(cTemp);
 }
 
 void MitsubishiHeatPump::setup() {
