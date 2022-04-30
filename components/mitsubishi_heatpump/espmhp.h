@@ -65,6 +65,8 @@ class MitsubishiHeatPump : public PollingComponent, public climate::Climate {
 
         // Set the baud rate. Must be called before setup() to have any effect.
         void set_baud_rate(int);
+        
+        float FahrenheitToCelsius(float);
 
         // print the current configuration
         void dump_config() override;

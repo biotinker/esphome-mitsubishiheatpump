@@ -413,7 +413,7 @@ float MitsubishiHeatPump::FahrenheitToCelsius(float tempF) {
 
 void MitsubishiHeatPump::set_remote_temperature(float temp) {
     ESP_LOGD(TAG, "Setting remote temp: %.1f", temp);
-    cTemp = this->FahrenheitToCelsius(temp)
+    float cTemp = this->FahrenheitToCelsius(temp)
     ESP_LOGD(TAG, "After celsius convert: %.1f", cTemp);
     this->hp->setRemoteTemperature(cTemp);
 }
